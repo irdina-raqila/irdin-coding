@@ -16,7 +16,7 @@ export default function AboutSection() {
       title: 'perjalanan belajar',
       icon: Code2,
       content:
-        'Aku belajar dengan sunggu-sungguh 🧠 agar aku bisa menggapai impianku menjadi seorang mahasiswa di STAN.',
+        'Aku belajar dengan sungguh-sungguh 🧠 agar bisa menggapai impianku menjadi mahasiswa STAN.',
     },
     {
       title: 'sekolah',
@@ -52,9 +52,27 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="py-24 md:py-32 bg-white dark:bg-[#0b0b0f]"
+      className="py-24 md:py-32 bg-white dark:bg-[#0b0b0f] relative overflow-hidden"
     >
-      <div className="container mx-auto px-6 flex justify-center">
+
+      {/* 🌸 FINAL VISIBLE LAYER (WHITE FRIENDLY) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+
+        {/* 💗 small but strong pink glow */}
+        <div className="absolute w-[520px] h-[520px] bg-pink-400/30 blur-[110px] top-[-80px] left-[-80px]" />
+
+        {/* 🌷 second glow */}
+        <div className="absolute w-[450px] h-[450px] bg-rose-400/25 blur-[110px] bottom-[-100px] right-[-100px]" />
+
+        {/* 💜 center accent */}
+        <div className="absolute w-[380px] h-[380px] bg-fuchsia-400/25 blur-[90px] top-[55%] left-[60%] -translate-x-1/2 -translate-y-1/2" />
+
+        {/* 🧠 IMPORTANT: lighter white overlay (biar glow tetap kelihatan) */}
+        <div className="absolute inset-0 bg-white/60 dark:bg-black/40" />
+
+      </div>
+
+      <div className="container mx-auto px-6 flex justify-center relative z-10">
 
         <div className="w-full max-w-5xl">
 
@@ -74,7 +92,7 @@ export default function AboutSection() {
 
           <div className="grid md:grid-cols-2 gap-10 items-center">
 
-            {/* FOTO + HOVER ZOOM */}
+            {/* FOTO */}
             <motion.div
               className="flex justify-center"
               initial="rest"

@@ -50,7 +50,7 @@ function SkillBar({
         </span>
       </div>
 
-      <div className="h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+      <div className="h-2.5 bg-gray-200/70 dark:bg-gray-800 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
@@ -59,8 +59,8 @@ function SkillBar({
           className="h-full rounded-full"
           style={{
             background:
-              'linear-gradient(90deg, #f9a8d4, #fb7185, #fbcfe8)',
-            boxShadow: '0 0 12px rgba(251, 113, 133, 0.35)',
+              'linear-gradient(90deg, #fbcfe8, #f472b6, #f9a8d4)',
+            boxShadow: '0 0 14px rgba(244,114,182,0.35)',
           }}
         />
       </div>
@@ -87,16 +87,22 @@ function SubjectCard({
       transition={{ duration: 0.6, delay }}
       className="
         relative p-6 rounded-3xl overflow-hidden
-        border border-gray-200 dark:border-gray-800
-        bg-white dark:bg-gray-900
-        shadow-sm hover:shadow-md transition
+        bg-white/80 dark:bg-white/5
+        backdrop-blur-xl
+        border border-pink-100 dark:border-white/10
+        shadow-[0_10px_40px_-20px_rgba(244,114,182,0.3)]
+        hover:-translate-y-1 transition
       "
     >
-      <div className="absolute inset-0 opacity-10 bg-pink-300 blur-3xl" />
+      {/* 🌸 visible pink layer */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute w-[250px] h-[250px] bg-pink-300/30 blur-[80px] top-[-80px] left-[-80px]" />
+        <div className="absolute w-[200px] h-[200px] bg-rose-300/20 blur-[80px] bottom-[-80px] right-[-80px]" />
+      </div>
 
       <div className="relative">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-3 rounded-2xl bg-pink-100 dark:bg-pink-900/20">
+          <div className="p-3 rounded-2xl bg-pink-100 dark:bg-pink-500/10">
             <span className="text-2xl">{icon}</span>
           </div>
 
@@ -123,13 +129,18 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="
-        py-24 md:py-32
-        bg-white dark:bg-black
-        transition-colors duration-500
-      "
+      className="relative py-24 md:py-32 bg-white dark:bg-black overflow-hidden"
     >
-      <div className="container mx-auto px-4">
+
+      {/* 🌸 GLOBAL LAYER (BIAR GAK FLAT) */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute w-[600px] h-[600px] bg-pink-400/25 blur-[140px] top-[-120px] left-[-120px]" />
+        <div className="absolute w-[500px] h-[500px] bg-rose-300/20 blur-[140px] bottom-[-150px] right-[-150px]" />
+        <div className="absolute inset-0 bg-white/60 dark:bg-black/40" />
+      </div>
+
+      <div className="relative container mx-auto px-4">
+
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -142,14 +153,7 @@ export default function SkillsSection() {
             📚 Pelajaran Sekolah ✨
           </span>
 
-          <h2
-            className="
-              text-4xl md:text-6xl font-bold mt-3 mb-4
-              bg-gradient-to-r from-black via-gray-800 to-pink-400
-              dark:from-white dark:via-gray-200 dark:to-pink-300
-              text-transparent bg-clip-text
-            "
-          >
+          <h2 className="text-4xl md:text-6xl font-bold mt-3 mb-4 text-gray-900 dark:text-white">
             My <span className="text-pink-500">Subjects 🎓</span>
           </h2>
 
@@ -157,7 +161,7 @@ export default function SkillsSection() {
             ✨ Perkembangan kemampuan di berbagai mata pelajaran dan skill pendukung belajar ✨
           </p>
 
-          <div className="w-24 h-[3px] bg-gradient-to-r from-black to-pink-400 dark:from-white dark:to-pink-300 mx-auto mt-6 rounded-full" />
+          <div className="w-24 h-[3px] bg-gradient-to-r from-pink-400 to-rose-300 mx-auto mt-6 rounded-full" />
         </motion.div>
 
         {/* GRID */}
@@ -183,6 +187,7 @@ export default function SkillsSection() {
             delay={0.2}
           />
         </div>
+
       </div>
     </section>
   );

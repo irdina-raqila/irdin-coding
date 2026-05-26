@@ -20,9 +20,25 @@ export default function HeroSection() {
       id="home"
       className="relative min-h-screen bg-white dark:bg-black overflow-hidden"
     >
-      <ThreeScene />
 
-      <div className="absolute inset-0 bg-white/70 dark:bg-black/60" />
+      {/* 🌸 FIXED VISIBLE LAYER (SAMA STYLE ABOUT) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+
+        {/* 💗 top left glow */}
+        <div className="absolute w-[600px] h-[600px] bg-pink-400/30 blur-[120px] top-[-120px] left-[-120px]" />
+
+        {/* 🌷 bottom right glow */}
+        <div className="absolute w-[520px] h-[520px] bg-rose-400/25 blur-[120px] bottom-[-140px] right-[-140px]" />
+
+        {/* 💜 center glow */}
+        <div className="absolute w-[420px] h-[420px] bg-fuchsia-400/20 blur-[100px] top-[55%] left-[60%] -translate-x-1/2 -translate-y-1/2" />
+
+        {/* 🧠 IMPORTANT: jangan terlalu putih solid */}
+        <div className="absolute inset-0 bg-white/65 dark:bg-black/40" />
+
+      </div>
+
+      <ThreeScene />
 
       <div className="relative z-10 min-h-screen flex items-center">
         <div className="container mx-auto px-6">
@@ -52,10 +68,8 @@ export default function HeroSection() {
             {/* TEXT */}
             <div className="md:col-span-7 text-center md:text-left">
 
-              {/* IDENTITY */}
               <motion.div {...fade(0.2)} className="leading-tight">
 
-                {/* LAYER */}
                 <div className="inline-flex items-center mb-3 px-5 py-2 rounded-full border border-pink-200 dark:border-pink-500/30 bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-sm">
                   <span className="text-sm md:text-[13px] text-pink-500 dark:text-pink-300 tracking-wide">
                     ✦ a small corner of my internet, quietly growing 🌸

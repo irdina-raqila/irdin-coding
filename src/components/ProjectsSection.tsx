@@ -71,21 +71,22 @@ export default function SongsSection() {
       id="projects"
       className="
         relative py-24 overflow-hidden
-
-        /* LIGHT MODE */
-        bg-white
-
-        /* DARK MODE */
-        dark:bg-[#020617]
-        dark:text-white
-
-        text-gray-900
+        bg-white dark:bg-[#020617]
+        text-gray-900 dark:text-white
       "
     >
-      {/* glow background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute w-[600px] h-[600px] bg-pink-400/15 blur-[150px] top-[-200px] left-[-200px]" />
-        <div className="absolute w-[600px] h-[600px] bg-indigo-400/15 blur-[150px] bottom-[-200px] right-[-200px]" />
+      {/* 🌸 LAYER BACKGROUND (FIXED VISIBILITY) */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+
+        {/* glow kiri atas */}
+        <div className="absolute w-[900px] h-[900px] bg-pink-300/30 blur-[220px] top-[-300px] left-[-300px]" />
+
+        {/* glow kanan bawah */}
+        <div className="absolute w-[800px] h-[800px] bg-rose-400/25 blur-[200px] bottom-[-300px] right-[-300px]" />
+
+        {/* glow tengah */}
+        <div className="absolute w-[600px] h-[600px] bg-fuchsia-300/15 blur-[180px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
       </div>
 
       {/* header */}
@@ -116,9 +117,8 @@ export default function SongsSection() {
                   hover:-translate-y-2 transition duration-500
                 ">
 
-                  {/* image glow */}
                   <div className="relative">
-                    <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${song.color} blur-2xl opacity-40 group-hover:opacity-80 transition`} />
+                    <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${song.color} blur-2xl opacity-50 group-hover:opacity-90 transition`} />
 
                     <div className={`relative rounded-xl p-[2px] bg-gradient-to-r ${song.color}`}>
                       <div className="overflow-hidden rounded-xl aspect-[2/3] bg-black">
@@ -130,8 +130,7 @@ export default function SongsSection() {
                     </div>
                   </div>
 
-                  {/* text */}
-                  <h3 className="mt-4 font-bold text-lg text-gray-900 dark:text-white">
+                  <h3 className="mt-4 font-bold text-lg">
                     {song.title}
                   </h3>
 
@@ -148,14 +147,24 @@ export default function SongsSection() {
         {/* buttons */}
         <Button
           onClick={scrollPrev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-white/10 backdrop-blur-md"
+          className="
+            absolute left-2 top-1/2 -translate-y-1/2
+            bg-white/90 dark:bg-white/10
+            backdrop-blur-md
+            border border-pink-200/40
+          "
         >
           <ChevronLeft />
         </Button>
 
         <Button
           onClick={scrollNext}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-white/10 backdrop-blur-md"
+          className="
+            absolute right-2 top-1/2 -translate-y-1/2
+            bg-white/90 dark:bg-white/10
+            backdrop-blur-md
+            border border-pink-200/40
+          "
         >
           <ChevronRight />
         </Button>
