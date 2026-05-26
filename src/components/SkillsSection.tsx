@@ -150,7 +150,7 @@ export default function SkillsSection() {
               text-transparent bg-clip-text
             "
           >
-            Skills <span className="text-pink-500">Akademik 🎓</span>
+            My <span className="text-pink-500">Subjects 🎓</span>
           </h2>
 
           <p className="text-pink-500/80 dark:text-pink-300 max-w-md mx-auto text-sm">
