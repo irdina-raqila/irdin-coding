@@ -15,7 +15,7 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
     { label: "Home", href: "#home" },
     { label: "Know Me", href: "#about" },
     { label: "Subjects", href: "#skills" },
-    { label: "Projects", href: "#projects" },
+    { label: "Favourite", href: "#projects" },
     { label: "Contact", href: "#contact" },
   ];
 
