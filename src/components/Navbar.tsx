@@ -8,9 +8,8 @@ interface NavbarProps {
 
 export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
   const [active, setActive] = useState("#home");
-  const [scrollSpeed, setScrollSpeed] = useState(0);
-  const lastScroll = useRef(0);
-  const time = useRef(0);
+  const [glow, setGlow] = useState(0);
+  const navRef = useRef<HTMLDivElement>(null);
 
   const items = [
     { label: "Home", href: "#home" },
@@ -22,10 +21,6 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
 
   useEffect(() => {
     const onScroll = () => {
-      const current = window.scrollY;
-      setScrollSpeed(Math.abs(current - lastScroll.current));
-      lastScroll.current = current;
-
       for (const item of items) {
         const el = document.querySelector(item.href);
         if (!el) continue;
@@ -41,6 +36,25 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!navRef.current) return;
+
+      const rect = navRef.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+
+      // 🔥 BOOST INTENSITY (biar keliatan)
+      const intensity = Math.max(0, 1 - dist / 350);
+      setGlow(intensity);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const goTo = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -49,34 +63,28 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
   return (
     <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
 
-      {/* 🔥 OUTER NEON (VISIBLE — SOFT PINK GLOW) */}
+
+
+      {/* ✨ SECOND HARD GLOW (biar neon kebaca, bukan samar) */}
       <div
-        className="absolute inset-0 scale-150 rounded-full"
+        className="absolute inset-0 blur-[35px]"
         style={{
-          background:
-            "radial-gradient(circle, rgba(255,105,180,0.45) 0%, rgba(255,20,147,0.20) 35%, transparent 70%)",
-          filter: "blur(35px)",
-          transform: `translateY(0px) scale(${1 + scrollSpeed * 0.0008})`,
-          transition: "transform 150ms ease-out",
+          opacity: 0.8,
+          boxShadow: `
+            0 0 ${40 + glow * 80}px rgba(255,105,180,0.35),
+            0 0 ${90 + glow * 120}px rgba(255,182,193,0.2)
+          `,
         }}
       />
 
-      {/* extra neon rim biar “kelihatan edge glow” */}
+      {/* 💎 NAV CORE */}
       <div
-        className="absolute inset-0 rounded-full blur-2xl opacity-60"
-        style={{
-          boxShadow:
-            "0 0 40px rgba(255,105,180,0.35), 0 0 90px rgba(255,20,147,0.25)",
-        }}
-      />
-
-      {/* NAV CORE */}
-      <div
-        className="relative flex items-center gap-5 px-6 py-2 rounded-full
-                   backdrop-blur-3xl
-                   bg-white/60 dark:bg-black/30
-                   border border-white/10 dark:border-white/10
-                   shadow-[0_40px_120px_rgba(0,0,0,0.25)]"
+        ref={navRef}
+        className="relative flex items-center gap-8 px-7 py-2 rounded-full
+                   backdrop-blur-xl
+                   bg-white/70 dark:bg-black/40
+                   border border-pink-200/20
+                   shadow-[0_30px_120px_rgba(0,0,0,0.3)]"
       >
 
         {items.map((item) => {
@@ -86,50 +94,37 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
             <button
               key={item.href}
               onClick={() => goTo(item.href)}
-              className="relative px-3 py-1 rounded-full group"
-              style={{
-                transform: isActive
-                  ? "translateY(-1px) scale(1.03)"
-                  : "translateY(0px) scale(1)",
-                transition: "all 450ms cubic-bezier(0.2, 0.8, 0.2, 1)",
-              }}
+              className="relative px-1 py-1 text-sm"
             >
-
-              {/* CAPSULE */}
-              <span
-                className={`
-                  absolute inset-0 rounded-full transition-all duration-300
-
-                  ${
-                    isActive
-                      ? "bg-pink-500/15 shadow-[inset_0_0_18px_rgba(255,105,180,0.18)]"
-                      : "bg-transparent group-hover:bg-white/10 dark:group-hover:bg-white/5"
-                  }
-                `}
-              />
 
               {/* TEXT */}
               <span
                 className={`
-                  relative z-10 text-sm transition-all duration-300
+                  transition-all duration-300
 
                   ${
                     isActive
-                      ? "text-pink-300 font-medium tracking-[0.22em] drop-shadow-[0_0_6px_rgba(255,105,180,0.5)]"
-                      : "text-foreground/50 group-hover:text-foreground"
+                      ? "text-pink-300 tracking-[0.22em] drop-shadow-[0_0_12px_rgba(255,105,180,0.8)]"
+                      : "text-foreground/60 hover:text-pink-200"
                   }
                 `}
               >
                 {item.label}
               </span>
 
-              {/* DOT */}
+              {/* 🌸 UNDERLINE NEON (FIXED VISIBILITY) */}
               <span
                 className={`
-                  absolute left-1/2 -bottom-[6px]
-                  w-[4px] h-[4px] rounded-full bg-pink-400
-                  transition-opacity duration-300
-                  ${isActive ? "opacity-100" : "opacity-0"}
+                  absolute left-1/2 -bottom-1 h-[2px]
+                  bg-pink-400 rounded-full
+                  shadow-[0_0_16px_rgba(255,105,180,0.9)]
+                  transition-all duration-300
+
+                  ${
+                    isActive
+                      ? "w-full -translate-x-1/2 opacity-100"
+                      : "w-0 opacity-0"
+                  }
                 `}
               />
             </button>
@@ -137,12 +132,12 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
         })}
 
         {/* divider */}
-        <div className="w-[1px] h-5 bg-white/10" />
+        <div className="w-[1px] h-5 bg-pink-300/30" />
 
         {/* theme */}
         <button
           onClick={toggleTheme}
-          className="text-foreground/50 hover:text-pink-400 transition"
+          className="text-foreground/60 hover:text-pink-400 transition"
         >
           {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
         </button>
