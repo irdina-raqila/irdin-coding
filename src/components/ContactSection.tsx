@@ -106,7 +106,8 @@ export default function ContactSection() {
           </h2>
 
           <p className="text-gray-500 dark:text-gray-400 mt-4">
-            Clean pink soft UI + fixed navigation scroll
+            Mau ngobrol, kerja sama, atau sekadar sapa? Aku selalu terbuka untuk itu! 
+            Jangan ragu untuk menghubungi aku kapan saja. 😊
           </p>
         </motion.div>
 
