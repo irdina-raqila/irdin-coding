@@ -13,8 +13,8 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
 
   const items = [
     { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
+    { label: "Know Me", href: "#about" },
+    { label: "Subjects", href: "#skills" },
     { label: "Projects", href: "#projects" },
     { label: "Contact", href: "#contact" },
   ];

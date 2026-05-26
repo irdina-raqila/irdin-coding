@@ -1,89 +1,188 @@
-import { motion } from 'framer-motion';
-import { Code2, Video, Coffee, Rocket } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Code2, Music, GraduationCap, MapPin, Heart } from 'lucide-react';
+import { useState } from 'react';
 
 export default function AboutSection() {
-  const stats = [
-    { icon: Code2, value: '50+', label: 'Projects Selesai' },
-    { icon: Video, value: '100+', label: 'Video Konten' },
-    { icon: Coffee, value: '1000+', label: 'Cangkir Kopi' },
-    { icon: Rocket, value: '5+', label: 'Tahun Pengalaman' },
+  const [open, setOpen] = useState<number | null>(0);
+
+  const bio = [
+    {
+      title: 'siapa aku',
+      icon: Heart,
+      content:
+        'Aku Irdina Raqila 💗 seorang pelajar yang lagi belajar jadi versi lebih baik di masa yang akan datang.',
+    },
+    {
+      title: 'perjalanan belajar',
+      icon: Code2,
+      content:
+        'Aku belajar dengan sunggu-sungguh 🧠 agar aku bisa menggapai impianku menjadi seorang mahasiswa di STAN.',
+    },
+    {
+      title: 'sekolah',
+      icon: GraduationCap,
+      content:
+        'Aku siswa MAN 1 Banda Aceh kelas X-11 📚 Lagi belajar banyak hal baru setiap hari.',
+    },
+    {
+      title: 'hal kecil tentang aku',
+      icon: Music,
+      content:
+        'Aku suka musik 🎧 karena bikin aku lebih tenang, fokus, dan nyaman saat belajar.',
+    },
+    {
+      title: 'asal',
+      icon: MapPin,
+      content:
+        'Aku lahir di Banda Aceh (19 Mei 2010) 🌸 tempat sederhana yang membentuk aku sampai sekarang.',
+    },
   ];
 
+  const stats = [
+    { value: '2010', label: 'lahir' },
+    { value: 'X-11', label: 'kelas' },
+    { value: 'MAN 1', label: 'sekolah' },
+    { value: 'STAN', label: 'cita-cita' },
+  ];
+
+  const toggle = (i: number) => {
+    setOpen(open === i ? null : i);
+  };
+
   return (
-    <section id="about" className="py-20 md:py-32 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-primary font-medium mb-2 block">Tentang Saya</span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Mengenal Lebih Dekat
-          </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
-        </motion.div>
+    <section
+      id="about"
+      className="py-24 md:py-32 bg-white dark:bg-[#0b0b0f]"
+    >
+      <div className="container mx-auto px-6 flex justify-center">
 
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden glass shadow-card">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <span className="text-8xl">👨‍💻</span>
-                </div>
-              </div>
-              <div className="absolute -bottom-6 -right-6 p-4 glass rounded-xl shadow-card">
-                <p className="font-display font-bold text-2xl text-gradient">5+ Tahun</p>
-                <p className="text-sm text-muted-foreground">Pengalaman</p>
-              </div>
-            </div>
+        <div className="w-full max-w-5xl">
+
+          {/* HEADER */}
+          <motion.div className="text-center mb-14">
+            <p className="text-pink-400 font-medium">
+              ✦ About Me
+            </p>
+
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white">
+              Know Me{' '}
+              <span className="text-pink-500 dark:text-pink-400">
+                Better 💗
+              </span>
+            </h2>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <h3 className="font-display text-2xl md:text-3xl font-bold">
-              Passionate Developer &amp; Creator
-            </h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Saya adalah seorang Fullstack Web Developer dengan passion yang kuat dalam menciptakan 
-              solusi digital yang inovatif. Dengan pengalaman lebih dari 5 tahun, saya telah 
-              membantu berbagai klien dan perusahaan dalam mewujudkan ide-ide mereka menjadi 
-              aplikasi web yang powerful dan user-friendly.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Selain coding, saya juga aktif sebagai Content Creator, berbagi pengetahuan 
-              tentang pemrograman dan teknologi melalui berbagai platform. Saya percaya bahwa 
-              berbagi ilmu adalah cara terbaik untuk terus belajar dan berkembang.
-            </p>
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="p-4 glass rounded-xl text-center hover:shadow-card-hover transition-shadow"
-                >
-                  <stat.icon className="h-6 w-6 text-primary mx-auto mb-2" />
-                  <p className="font-display text-2xl font-bold">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </motion.div>
-              ))}
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+
+            {/* FOTO + HOVER ZOOM */}
+            <motion.div
+              className="flex justify-center"
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+            >
+              <div className="relative overflow-hidden rounded-[28px]">
+
+                <motion.img
+                  src="/fotoirdin2.jpg"
+                  className="
+                    w-[260px] md:w-[300px]
+                    h-[380px] md:h-[460px]
+                    object-cover object-top
+                    rounded-[28px]
+                    border border-pink-200 dark:border-pink-500/30
+                    shadow-2xl
+                  "
+                  variants={{
+                    rest: { scale: 1 },
+                    hover: { scale: 1.08 },
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    ease: 'easeOut',
+                  }}
+                />
+
+                <div className="absolute inset-0 rounded-[28px] bg-pink-400/10 blur-xl -z-10" />
+
+              </div>
+            </motion.div>
+
+            {/* TEXT */}
+            <div className="space-y-5">
+
+              {/* ACCORDION */}
+              <div className="space-y-3">
+
+                {bio.map((item, i) => (
+                  <div
+                    key={i}
+                    className="
+                      border border-pink-100 dark:border-pink-500/20
+                      rounded-2xl overflow-hidden
+                      bg-white dark:bg-black/30
+                      backdrop-blur-md
+                    "
+                  >
+                    <button
+                      onClick={() => toggle(i)}
+                      className="w-full flex items-center justify-between px-5 py-4"
+                    >
+                      <div className="flex items-center gap-3">
+                        <item.icon className="w-5 h-5 text-pink-500" />
+                        <span className="text-gray-900 dark:text-white font-medium">
+                          {item.title}
+                        </span>
+                      </div>
+
+                      <span className="text-pink-400 text-lg">
+                        {open === i ? '−' : '+'}
+                      </span>
+                    </button>
+
+                    <AnimatePresence>
+                      {open === i && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="px-5 pb-4 text-gray-600 dark:text-gray-300 leading-relaxed"
+                        >
+                          {item.content}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+
+              </div>
+
+              {/* STATS */}
+              <div className="grid grid-cols-2 gap-3 pt-2">
+
+                {stats.map((s, i) => (
+                  <div
+                    key={i}
+                    className="
+                      p-3 rounded-2xl text-center
+                      border border-pink-100 dark:border-pink-500/20
+                      bg-white dark:bg-black/30
+                      backdrop-blur-md
+                    "
+                  >
+                    <p className="text-pink-500 dark:text-pink-400 font-bold">
+                      {s.value}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {s.label}
+                    </p>
+                  </div>
+                ))}
+
+              </div>
+
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
