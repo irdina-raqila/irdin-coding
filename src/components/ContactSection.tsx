@@ -74,9 +74,16 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="relative py-32 bg-white dark:bg-black overflow-hidden">
-
-      {/* BACKGROUND LAYERS (SAFE - NO LAYOUT SHIFT) */}
+    <section
+      id="contact"
+      className="
+        scroll-mt-28
+        relative py-32
+        bg-white dark:bg-black
+        overflow-hidden
+      "
+    >
+      {/* BACKGROUND LAYER */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute w-[700px] h-[700px] bg-pink-200/20 blur-[180px] top-[-200px] left-[-200px]" />
         <div className="absolute w-[600px] h-[600px] bg-rose-300/10 blur-[200px] bottom-[-200px] right-[-200px]" />
@@ -95,21 +102,19 @@ export default function ContactSection() {
           </p>
 
           <h2 className="text-5xl md:text-6xl font-bold mt-4">
-            Let’s{" "}
-            <span className="text-pink-400">Connect</span>
+            Let’s <span className="text-pink-400">Connect</span>
           </h2>
 
           <p className="text-gray-500 dark:text-gray-400 mt-4">
-            Clean layout + soft pink depth, not template anymore.
+            Clean pink soft UI + fixed navigation scroll
           </p>
         </motion.div>
 
-        {/* GRID (FIXED SEJAJAR) */}
+        {/* GRID */}
         <div className="grid lg:grid-cols-2 gap-12 items-start">
 
           {/* LEFT */}
           <div className="space-y-6">
-
             {contactInfo.map((item, i) => (
               <motion.a
                 key={i}
@@ -138,10 +143,9 @@ export default function ContactSection() {
                 </div>
               </motion.a>
             ))}
-
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT FORM */}
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 30 }}
@@ -155,7 +159,6 @@ export default function ContactSection() {
               space-y-5
             "
           >
-
             <Input
               placeholder="Your name"
               className="border-b border-pink-200 rounded-none bg-transparent focus:border-pink-400"
@@ -205,9 +208,7 @@ export default function ContactSection() {
               )}
               Send Message
             </Button>
-
           </motion.form>
-
         </div>
       </div>
     </section>
